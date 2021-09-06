@@ -89,9 +89,9 @@ DATABASES = {
         'PORT': '5430',
     }
 }
-
-db_from_env = dj_database_url.config(default=os.environ['HEROKU_POSTGRESQL_PUCE_URL'])
-DATABASES['default'].update(db_from_env)
+if 'HEROKU_POSTGRESQL_PUCE_URL' in os.environ:
+    db_from_env = dj_database_url.config(default=os.environ['HEROKU_POSTGRESQL_PUCE_URL'])
+    DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

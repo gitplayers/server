@@ -81,9 +81,11 @@ class Profile(models.Model):
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-        if created:
+        print(instance.is_superuser)
+        if created and not instance.is_superuser:
            Profile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+        if not instance.is_superuser:
+            instance.profile.save()
