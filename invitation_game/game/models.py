@@ -74,10 +74,10 @@ class Game(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    wedding_url=models.CharField(max_length=30, blank=True, unique=True)
-    side1 = models.OneToOneField(Game, on_delete=models.CASCADE, related_name='side1')
-    side2 = models.OneToOneField(Game, on_delete=models.CASCADE, related_name='side2')
-    invitation = models.ForeignKey(Invitation, on_delete=models.SET_NULL, null=True)
+    wedding_url=models.CharField(max_length=30, blank=True, unique=True, null=True)
+    side1 = models.OneToOneField(Game, on_delete=models.CASCADE, related_name='side1', blank=True, null=True)
+    side2 = models.OneToOneField(Game, on_delete=models.CASCADE, related_name='side2', blank=True, null=True)
+    invitation = models.ForeignKey(Invitation, on_delete=models.CASCADE, blank=True, null=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
