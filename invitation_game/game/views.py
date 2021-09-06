@@ -10,6 +10,7 @@ from .models import Question, Character, Score, Invitation, Game, Profile
 from .forms import NewGameForm
 
 # Create your views here.
+
 def home(req, name = 'person'):
         context = {"name": name}
     
@@ -63,10 +64,10 @@ def json_scores(request, id):
         game = get_object_or_404(Game, pk=id) 
         serializer = GameScoresSerializer(game)
         return JsonResponse(serializer.data, safe=False)
-    elif request.method == 'PUT':
+    elif request.method == 'PATCH':
         
         game = get_object_or_404(Game, pk=id) 
-        serializer = GameScoresSerializer(game, data=json.loads(request.body))
+        serializer = GameScoresSerializer(game, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
