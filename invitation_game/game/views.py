@@ -67,7 +67,7 @@ def json_scores(request, id):
     elif request.method == 'PATCH':
         
         game = get_object_or_404(Game, pk=id) 
-        serializer = GameScoresSerializer(game, data=request.data)
+        serializer = GameScoresSerializer(game, data=json.loads(request.body))
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
