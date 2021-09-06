@@ -1,1 +1,1 @@
-web: gunicorn invitation_game.wsgi --log-file -
+web: gunicorn invitation_game/invitation_game.wsgi --log-file -
