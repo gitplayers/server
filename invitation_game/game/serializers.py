@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('question', 'correct_answer', 'incorret_answers')
+        fields = ('question', 'correct_answer', 'incorrect_answers')
 
 class InvitationSerializer(serializers.ModelSerializer):
 

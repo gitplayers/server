@@ -32,7 +32,7 @@ def character_list_tuple(data):
 class Question(models.Model):
     question = models.CharField(max_length=500)
     correct_answer = models.CharField(max_length=100)
-    incorret_answers = ArrayField(
+    incorrect_answers = ArrayField(
         models.CharField(max_length=100, blank=True),
         size=3,
     )
