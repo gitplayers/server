@@ -79,13 +79,13 @@ class Profile(models.Model):
     side2 = models.OneToOneField(Game, on_delete=models.CASCADE, related_name='side2', blank=True, null=True)
     invitation = models.ForeignKey(Invitation, on_delete=models.CASCADE, blank=True, null=True)
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        print(instance.is_superuser)
-        if created and not instance.is_superuser:
-           Profile.objects.create(user=instance)
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     print(instance.is_superuser)
+    #     if created and not instance.is_superuser:
+    #        Profile.objects.create(user=instance)
 
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        if not instance.is_superuser:
-            instance.profile.save()
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     if not instance.is_superuser:
+    #         instance.profile.save()
