@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import dj_database_url
 import django_heroku
 from pathlib import Path
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -91,7 +90,7 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config(default=config('HEROKU_POSTGRESQL_PUCE_URL'))
+db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
 # Password validation
