@@ -69,11 +69,10 @@ class IDGameSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    userid = serializers.CharField(source='user.id')
     side1 = IDGameSerializer(read_only=True)
     side2 = IDGameSerializer(read_only=True)
     invitation = InvitationSerializer(read_only=True)
 
     class Meta:
         model = Profile
-        fields = ('userid', 'wedding_url', 'side1', 'side2', 'invitation')
+        fields = ('wedding_url', 'side1', 'side2', 'invitation')
