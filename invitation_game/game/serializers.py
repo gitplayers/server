@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
-from .models import Question, Character, Score, Invitation, Game
+from .models import Question, Character, Score, Invitation, Game, Profile
+from django.contrib.auth.models import User
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -28,13 +29,12 @@ class ScoreSerializer(serializers.ModelSerializer):
 
 class GameSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True)
-    invitation = InvitationSerializer(read_only=True)
     character = CharacterSerializer(read_only=True)
     scores = ScoreSerializer(many=True)
 
     class Meta:
         model = Game
-        fields = ('id', 'questions', 'character', 'invitation', 'scores')
+        fields = ('id', 'questions', 'character', 'scores')
 
 class GameScoresSerializer(serializers.ModelSerializer):
     scores = ScoreSerializer(many=True)
@@ -58,3 +58,22 @@ class GameScoresSerializer(serializers.ModelSerializer):
         instance.scores.set(self.create_or_update_scores(scores))
         instance.save()
         return instance
+
+class IDGameSerializer(serializers.ModelSerializer):
+    character = CharacterSerializer(read_only=True)
+
+    class Meta:
+        model = Game
+        fields = ('id', 'character')
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+    userid = serializers.CharField(source='user.id')
+    side1 = IDGameSerializer(read_only=True)
+    side2 = IDGameSerializer(read_only=True)
+    invitation = InvitationSerializer(read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = ('userid', 'wedding_url', 'side1', 'side2', 'invitation')

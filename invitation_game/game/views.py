@@ -5,8 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 import json
 
-from .serializers import GameSerializer, GameScoresSerializer
-from .models import Question, Character, Score, Invitation, Game
+from .serializers import GameSerializer, GameScoresSerializer,  UserSerializer
+from .models import Question, Character, Score, Invitation, Game, Profile
 from .forms import NewGameForm
 
 # Create your views here.
@@ -70,4 +70,9 @@ def json_scores(request, id):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
-        return JsonResponse(serializer.data, safe=False)    
+        return JsonResponse(serializer.data, safe=False) 
+
+def json_user(request, wedding_url):
+    profile = get_object_or_404(Profile, wedding_url=wedding_url)
+    serializer =  UserSerializer(profile)
+    return JsonResponse(serializer.data, safe=False)
