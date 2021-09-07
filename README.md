@@ -26,6 +26,7 @@
 
 | Route          | Data Required from front end                                           | Description                                             | Type   |
 | -------------- | ---------------------------------------------------------------------- | ------------------------------------------------------- | ------ |
+
 | /json/:game_id | not aplicable | Return game configuration for specific id | GET |
 | /json/:game_id/scores | name of gamer and score of gamer |  update the scores of a game with a new one  | PATCH   |
 | /json/:game_id/scores | not aplicable | Return updated scores (not whole object) | GET |
