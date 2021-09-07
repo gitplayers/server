@@ -6,3 +6,4 @@ class NewGameForm(forms.ModelForm):
         model = Game
         fields = ['character', 'questions']
         widgets = {'questions': forms.HiddenInput()}
+

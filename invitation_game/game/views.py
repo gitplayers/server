@@ -4,10 +4,12 @@ from django.http import  JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
+
 from pathlib import Path
 import json
 
 from .serializers import GameSerializer, GameScoresSerializer, InvitationSerializer, IDGameSerializer, QuestionSerializer,  UserSerializer
+
 from .models import Question, Character, Score, Invitation, Game, Profile
 from .forms import NewGameForm
 
@@ -90,6 +92,7 @@ def home(request):
         form = NewGameForm()
     data = {'form': form, 'questions':''}
     return render(request, 'game/newProfile.html', data)
+
         
 
 @login_required
