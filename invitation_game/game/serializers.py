@@ -43,19 +43,19 @@ class GameScoresSerializer(serializers.ModelSerializer):
         model = Game
         fields = ('id', 'scores')
 
-    def create_or_update_scores(self, scores):
-        score_collection = []
-        for score in scores:
-            if 'id' not in score:
-                created = Score.objects.create(**score)
-                score_collection.append(created)
-            else:
-                score_collection.append(get_object_or_404(Score,pk=score['id']))
-        return score_collection
+    # def create_or_update_scores(self, scores):
+    #     score_collection = []
+    #     for score in scores:
+    #         if 'id' not in score:
+    #             created = Score.objects.create(**score)
+    #             score_collection.append(created)
+    #         else:
+    #             score_collection.append(get_object_or_404(Score,pk=score['id']))
+    #     return score_collection
     
     def update(self, instance, validated_data):
         scores = validated_data.pop('scores', [])
-        instance.scores.set(self.create_or_update_scores(scores))
+        instance.scores.add(Score.objects.create(**scores[0]))
         instance.save()
         return instance
 
