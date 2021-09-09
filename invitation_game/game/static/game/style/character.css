@@ -61,4 +61,8 @@ input.bodytypeChanger {
 }
 input#id_name {
     margin: 0px 5px;
+    cursor: text;
+}
+input{
+    cursor: pointer;
 }

@@ -1,3 +1,23 @@
+## Technologies
+
+  - DB 
+    * docker
+    * postgresql
+  
+  - Frontend
+    * React 
+    * html canvas
+    * chart.js
+
+  - Backend 
+    * django
+    * django rest framework
+  
+  - Deployment 
+    * Netlify
+    * Heroku with postgresql addon
+
+
 ## Installation
 
 * Clone or download the repo.
