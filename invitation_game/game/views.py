@@ -330,7 +330,7 @@ def game(request, gamenumber):
             'form':form,
             **initial
         }
-    return render(request, "game/newGame.html", data)
+    return render(request, "game/newgame.html", data)
 
 @login_required
 def invitation(request):
