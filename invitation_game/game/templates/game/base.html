@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'game/style.css' %}"/>
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'game/style/style.css' %}"/>
+    <title>Gamevitation</title>
+    <link rel="shortcut icon" type="jpg" href="https://png.pngtree.com/png-vector/20191028/ourlarge/pngtree-game-control-line-icon-vector-png-image_1904129.jpg"/>
 </head>
 <body>
-
-   <div class="linkset right">
+    <section role="logo" class="header">
+        <a href="{% url 'home' %}"><img src="{% static 'game/logo.png'%}"/></a>
+        <div class="linkset right">
             {% if user.is_authenticated %}
                 <span>Welcome, {{user}}</span>
                 <a href="{% url 'logout' %}">Logout</a>
@@ -18,7 +20,9 @@
                 <a href="{% url 'signup' %}">Sign up</a>
                 <a href="{% url 'login' %}">Login</a>
             {% endif %}
-    </div>
+        </div>
+	</section>
+   
 
     {% if messages %}
         {% for message in messages %}
@@ -27,8 +31,10 @@
     {% endif %}
     
     <main>
-        {% block content %}
-        {% endblock content %}
+        <div class='container'>
+            {% block content %}
+            {% endblock content %}
+         </div>
     </main>  
 </body>
 </html>
