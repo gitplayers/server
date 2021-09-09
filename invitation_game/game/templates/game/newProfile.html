@@ -27,16 +27,21 @@
             <h4>✉ Invitation missing ❌</h4>
             <a href="{% url 'invitation-form' %}">Create invitation</a>
         {% endif %}
-        {% if side1 and side2 and invitation%}
-            {{form}}
+        {% if side1 and side2 and invitation %}
+            {% if wedding_url%}
+                <div hidden>    
+                    {{form}}
+                </div>
+            {%else%}
+                    {{form}}
+                </br>
+            {%endif%}
             </br>
             <button type='submit' id='profilemaker'>Save my changes</button>{% endif %}
         {% if wedding_url and side1 and side2 and invitation%}
             <h4>🍰 Wedding link </h4>
-            <a href="https://gamevitation.netlify.app/{{wedding_url}}">gamevitation.netlify.app/{{wedding_url}}</a>
+            <a href="https://gamevitation.netlify.app/wedding/{{wedding_url}}">gamevitation.netlify.app/{{wedding_url}}</a>
         {% endif %}
-
-        
     </form>
     {% comment %} <script>
         form = document.querySelector('form')
