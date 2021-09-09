@@ -14,6 +14,20 @@
                 "title":"Short brunete"
             }
         ],
+        "E":[
+            {
+                "id":1,
+                "title":"Green"
+            },
+            {
+                "id":2,
+                "title":"Brown"
+            },
+            {
+                "id":3,
+                "title":"Blue"
+            }
+        ],
         "S":[
             {
                 "id":1,
@@ -28,7 +42,7 @@
                 "title":"Olive tone"
             }
         ],
-        "E":[
+        "D":[
             {
                 "id":1,
                 "title":"Dress version 1"
@@ -53,20 +67,6 @@
                 "id":6,
                 "title":"Relaxed black suit"
             }
-        ],
-        "D":[
-            {
-                "id":1,
-                "title":"Green"
-            },
-            {
-                "id":2,
-                "title":"Brown"
-            },
-            {
-                "id":3,
-                "title":"Blue"
-            }
         ]
     },
     "bodytype_2":{
@@ -82,6 +82,20 @@
             {
                 "id":6,
                 "title":"Short cut brunete"
+            }
+        ],
+        "E":[
+            {
+                "id":4,
+                "title":"Upper green"
+            },
+            {
+                "id":5,
+                "title":"Upper brown"
+            },
+            {
+                "id":6,
+                "title":"Upper blue"
             }
         ],
         "S":[
@@ -111,21 +125,8 @@
                 "id":7,
                 "title":"Dress version 3"
             }
-        ],
-        "E":[
-            {
-                "id":4,
-                "title":"Upper green"
-            },
-            {
-                "id":5,
-                "title":"Upper brown"
-            },
-            {
-                "id":6,
-                "title":"Upper blue"
-            }
         ]
+        
     }
 
 }
