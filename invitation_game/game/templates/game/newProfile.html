@@ -1,37 +1,41 @@
 {% extends "game/base.html"%}
 {% block content %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'game/style/profile.css' %}"/>
     <form method='post'>
         {% csrf_token %}
         {% if side1 %}
             {% comment %} // show game character {% endcomment %}
-            <a href="{% url 'game-form' gamenumber=1 %}">Update the configuration number 1 </a>
+            <h4>🎮 Game 1 configuration done ✔ </h4>
+            <a href="{% url 'game-form' gamenumber=1 %}">Update game 1</a>
         {% else%}
-            <a href="{% url 'game-form' gamenumber=1 %}">Create the configuration number 1 </a>
+            <h4>🎮 Game 1 configuration missing ❌</h4>
+            <a href="{% url 'game-form' gamenumber=1 %}">Create game 1</a>
         {% endif %}
-
         {% if side2 %}
             {% comment %} // show game character {% endcomment %}
-            <a href="{% url 'game-form' gamenumber=2 %}">Update the configuration number 1 </a>
+            <h4>🎮 Game 2 configuration done ✔ </h4>
+            <a href="{% url 'game-form' gamenumber=2 %}">Update game 2</a>
         {% else%}
-            <a href="{% url 'game-form' gamenumber=2 %}">Create the configuration number 1 </a>
+            <h4>🎮 Game 2 configuration missing ❌</h4>
+            <a href="{% url 'game-form' gamenumber=2 %}">Create game 2</a>
         {% endif %}
-
         {% if invitation %}
-            <h4>{{invitation.title|truncatechars:20}}</h4>
-            <p>{{invitation.message|truncatechars:50}}
-            <a href="{% url 'invitation-form' %}">Update the formal invitation</a>
+            <h4>✉ Invitation done  ✔</h4>
+            <a href="{% url 'invitation-form' %}">Update invitation</a>
         {% else%}
-            <a href="{% url 'invitation-form' %}">Create the formal invitation</a>
+            <h4>✉ Invitation missing ❌</h4>
+            <a href="{% url 'invitation-form' %}">Create invitation</a>
         {% endif %}
-
-       
         {% if side1 and side2 and invitation%}
             {{form}}
-            <button type='submit' id='profilemaker'> Obtain my link </button>
-        {% endif %}
+            </br>
+            <button type='submit' id='profilemaker'>Save my changes</button>{% endif %}
         {% if wedding_url and side1 and side2 and invitation%}
-            <a href="{{netlify_url}}/{{wedding_url}}">{{wedding_url}}</a>
+            <h4>🍰 Wedding link </h4>
+            <a href="https://gamevitation.netlify.app/{{wedding_url}}">gamevitation.netlify.app/{{wedding_url}}</a>
         {% endif %}
+
         
     </form>
     {% comment %} <script>

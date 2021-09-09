@@ -34,5 +34,6 @@ class NewProfileForm(forms.ModelForm):
             'user': forms.HiddenInput(),
             'side1': forms.HiddenInput(),
             'side2': forms.HiddenInput(),
-            'invitation': forms.HiddenInput()
+            'invitation': forms.HiddenInput(),
+            'wedding_url': forms.HiddenInput()
         }

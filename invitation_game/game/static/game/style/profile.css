@@ -1,0 +1,19 @@
+.container a {   
+    border-style: solid;
+    margin: 5px;
+    background: var(--secundary-color);
+    color: white;
+    border-color: var(--secundary-color);
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+}
+form > * {
+    align-self: center;
+}
