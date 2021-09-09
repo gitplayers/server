@@ -1,67 +1,115 @@
 {% extends "game/base.html"%}
 {% block content %} 
 {% load static %}
+    <link rel="stylesheet" href="{% static 'game/style/character.css' %}"/>
     <form method='post'>
         {% csrf_token %}
+        {{ form }}
         <div id='body1'>
-            {% for part in character.bodytype_1 %}
-                <div id='{{part}}'>
-                    <p>{{part}}</p>
-                    {% for value in character.bodytype_1.H%}
-                        <p>key,value:{{value.id}}</p>
-                        {% with firstpart=value.id|stringformat:"s"|add:".png" %}
-                        {% with secondpart=part|add:firstpart %}
-                        {% with url="game/character_sprites/"|add:secondpart%}
-                        <p>p{{seconpart}}{{firstpart}}</p>
-                        <img src="{% static url %}" alt={{value.title}} onClick='updateinput("{{part}}","{{value.id}}")'>
-                        {%endwith%}
-                        {%endwith%}
-                        {%endwith%}
+            {% for part, value in character.bodytype_1.items%}
+                <select class='{{part}} body1' hidden>
+                    {%for item in value%}
+                        {% with firstpart=item.id|stringformat:"s"|add:".png" %}{% with secondpart=part|add:firstpart %}{% with url="game/character_sprites/"|add:secondpart%}                       
+                        <option value='{% static url %}'></option>
+                        {%endwith%} {%endwith%} {%endwith%}
                     {%endfor%}
-                </div>
+                </select>
             {%endfor%}
         </div>
         <div id='body2'>
-            {% for part2 in character.bodytype_2 %}
-                <div id='{{part2}}'>
-                    <p>{{part2}}</p>
-                    {% for value in character.bodytype_2.H%}
-                        <p>key,value:{{value.id}}</p>
-                        {% with firstpart=value.id|stringformat:"s"|add:".png" %}
-                        {% with secondpart=part2|add:firstpart %}
-                        {% with url="game/character_sprites/"|add:secondpart%}
-                        <p>p{{seconpart}}{{firstpart}}</p>
-                        <img src="{% static url %}" alt={{value.title}} onClick='updateinput("{{part2}}","{{value.id}}")'>
-                        {%endwith%}
-                        {%endwith%}
-                        {%endwith%}
+           {% for part, value in character.bodytype_2.items%}
+                <select class='{{part}} body2' hidden>
+                    {%for item in value%}
+                        {% with firstpart=item.id|stringformat:"s"|add:".png" %}{% with secondpart=part|add:firstpart %}{% with url="game/character_sprites/"|add:secondpart%}                       
+                        <option value='{% static url %}'></option>
+                        {%endwith%} {%endwith%} {%endwith%}
                     {%endfor%}
-                </div>
+                </select>
             {%endfor%}
         </div>
-        {{ form }}
-            <button type='submit' id='gamemaker'>Submit</button>
+        <input type='button' class='bodytypeChanger' onClick='toggleBody()' value='Toggle Body'/>
+        <div id='characterSelect'>
+            <div id='nextButtons'  class='buttonDiv'>
+                {%for n in '0123'|make_list %}
+                   <input type='button' id='{{n}}NextButton' onClick='cycleOptions(-1, {{n}})' value='<'/>
+                {% endfor %}
+            </div>
+            <div class='showSelected'>
+                <img class='hair' src={% static 'game/character_sprites/H1.png'%} id='H'>
+                <img class='eyes' src={% static 'game/character_sprites/E1.png'%} id='E'>
+                <img class='skin' src={% static 'game/character_sprites/S1.png'%} id='S'>
+                <img class='dress' src={% static 'game/character_sprites/D1.png'%} id='D'>
+                <img>
+            </div>
+            <div id='prevButtons'  class='buttonDiv'>
+                {%for n in '0123'|make_list %}
+                    <input type='button' id='{{n}}PrevButton' onClick='cycleOptions(1, {{n}})' value='>'/>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <input type='submit' id='charactermaker'>
     </form>
+
+    <script defer src="{% static "game/js/character.js" %}"></script>
     <script>
-        function updateinput(inputname, id){
-            switch(inputname){
-                case 'H':
-                    inputid='hair_id';
+        let bodyType='body1';
+
+        function toggleBody(){
+            bodyType= ( bodyType == 'body1')? 'body2': 'body1'
+             cycleOptions(1,0)
+             cycleOptions(1,1)
+             cycleOptions(1,2)
+             cycleOptions(1,3)
+        }
+        function cycleOptions(add, side){
+            let div = document.getElementById(bodyType);
+            let select = div.children[side];
+            let n=0
+            let t=false
+            while(n<select.children.length && t==false){
+                t = select.children[n].selected
+                n++
+            }
+            n--;
+            m=(n+add)%select.children.length;
+            select.children[n].selected = false;
+            console.log(n)
+            console.log(m)
+            select.children[m].selected = true;
+            let img;
+            let inputid;
+            switch(side){
+                case 0:
+                    console.log('h')
+                    img= document.querySelector(".hair")
+                    img.src = select.children[n].value
+                    inputid = document.querySelector('input[name="hair_id"]')
+                    inputid.value = select.children[n].value.match(/([0-9]+).png$/i)[1]
                     break;
-                case 'E':
-                    inputid='eyes_id';
+                case 1:
+                    console.log('e')
+                    img= document.querySelector(".eyes")
+                    img.src = select.children[n].value
+                    inputid = document.querySelector('input[name="eyes_id"]')
+                    inputid.value = select.children[n].value.match(/([0-9]+).png$/i)[1]
                     break;
-                case 'D':
-                    inputid='dress_id';
+                case 2:
+                    console.log('s')
+                    img= document.querySelector(".skin")
+                    img.src = select.children[n].value
+                    inputid = document.querySelector('input[name="skin_id"]')
+                    inputid.value = select.children[n].value.match(/([0-9]+).png$/i)[1]
                     break;
-                case 'S':
-                    inputid='skin_id';
+                case 3:
+                    console.log('d')
+                    img= document.querySelector(".dress")
+                    img.src = select.children[n].value
+                    inputid = document.querySelector('input[name="dress_id"]')
+                    inputid.value = select.children[n].value.match(/([0-9]+).png$/i)[1]
                     break;
             }
-            a = document.querySelector('input[name="'+inputid+'"]')
-            a.value = parseInt(id)
         }
-
     </script>
 
 {% endblock content %}

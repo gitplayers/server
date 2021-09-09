@@ -1,0 +1,43 @@
+.hair, .skin, .dress, .eyes {
+    position: absolute;
+    transform: scale(1.5);
+}
+.eyes{
+    z-index: 6;
+}
+.hair{
+    z-index: 5;
+}
+.dress{
+    z-index: 4;
+}
+.hair{
+    z-index: 3;
+}
+.showSelected{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 50vh;
+}
+.buttonDiv button {
+    font-size: 1.5rem;
+    border-radius: 20%;
+}
+
+.buttonDiv {
+    margin: 30px 0;
+}
+
+.buttonDiv {
+    display: flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+}
+
+#characterSelect{
+    display: flex;
+    flex-direction: row;
+}

@@ -313,7 +313,6 @@ def game(request, gamenumber):
         else:
             print(game.errors)
             initial = gamedatagetter(request, gamenumber)
-            print(initial)
             data = {
                 'form':game,
                 **initial,
@@ -326,7 +325,6 @@ def game(request, gamenumber):
             if hasattr(request.user, 'profile') and request.user.profile.side2:
                 gameInstance = gamedatasetter(request,int(request.user.profile.side2.id), gamenumber)
         initial=gamedatagetter(request, gamenumber)
-        print(initial)
         form = NewGameForm(initial=initial)
         data = {
             'form':form,

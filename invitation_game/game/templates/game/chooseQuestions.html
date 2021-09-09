@@ -1,5 +1,7 @@
 {% extends "game/base.html"%}
+{% load static %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'game/style/question.css' %}"/>
     <form method='post'>
     {% csrf_token %}
     {% autoescape off %}
@@ -14,12 +16,12 @@
                     document.querySelector("[name={{question}}]").value="{{row.question|stringformat:"s"}}"
                 </script>
                 <label for={{correct}}>{{row.question|stringformat:"s"}}</label>
-                <select name={{correct}} id={{correct}}>
+                <select name={{correct}} id="{{correct}}">
                     {% for m in row.options %}
                         <option>{{m}}</option>
                     {% endfor %}
                 </select>
-                <select name={{incorrect}} id={{incorrect}} multiple="multiple" hidden>
+                <select name={{incorrect}} id="{{incorrect}}" multiple="multiple" hidden>
                     {% for m in row.options %}
                         <option>{{m}}</option>
                     {% endfor %}
@@ -33,38 +35,23 @@
     {% endif %}
     {% endautoescape %}
     </form>
-
+    <script defer src="{% static "game/js/questions.js" %}"></script>
     <script>
-    function updateQuestions(){
-        a = document.querySelectorAll('input[type="text"]')
-        b = document.querySelectorAll('label') 
-        for(let question of a){
-            question.value = question.value.replaceAll('{username}',"{{name}}")
+        function dothething(){
+            for(let i=0;i<{{questions|length}};i++){            
+                mirror(i)
+            }
         }
-        for(let label of b){
-            label.textContent = label.textContent.replaceAll('{username}',"{{name}}")
+        function updateQuestions(){
+            a = document.querySelectorAll('input[type="text"]')
+            b = document.querySelectorAll('label') 
+            for(let question of a){
+                question.value = question.value.replaceAll('{username}',"{{name}}")
+            }
+            for(let label of b){
+                label.textContent = label.textContent.replaceAll('{username}',"{{name}}")
+            }
         }
-    }
-    updateQuestions();
-
-    dothething();
-    function mirror(number){   
-        selected = document.getElementById('correct-answer-'+number)
-        incorrect =  document.getElementById('incorrect-answer-'+number)
-        for(let j=0; j<4;j++){
-            incorrect.children[j].selected = !selected.children[j].selected
-        }
-    }
-    function dothething(){
-        for(let i=0;i<{{questions|length}};i++){            
-            mirror(i)
-        }
-    }
-    function validateSubmission(e) {
-        e.preventDefault()
-        dothething()
-        e.submit()
-    }
     </script>
 {% endblock content %}
 
