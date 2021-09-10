@@ -16,7 +16,7 @@
                     document.querySelector("[name={{question}}]").value="{{row.question|stringformat:"s"}}"
                 </script>
                 <label for={{correct}}>{{row.question|stringformat:"s"}}</label>
-                <select name={{correct}} id="{{correct}}">
+                <select name={{correct}} id="{{correct}}" onChange='mirror({{forloop.counter0}})'>
                     {% for m in row.options %}
                         <option>{{m}}</option>
                     {% endfor %}
@@ -35,7 +35,6 @@
     {% endif %}
     {% endautoescape %}
     </form>
-    <script defer src="{% static "game/js/questions.js" %}"></script>
     <script>
         function dothething(){
             for(let i=0;i<{{questions|length}};i++){            
@@ -51,6 +50,22 @@
             for(let label of b){
                 label.textContent = label.textContent.replaceAll('{username}',"{{name}}")
             }
+        }
+        updateQuestions();
+        dothething();
+        function mirror(number){   
+            selected = document.getElementById('correct-answer-'+number)
+            incorrect =  document.getElementById('incorrect-answer-'+number)
+            for(let j=0; j<4;j++){
+                incorrect.children[j].selected = !selected.children[j].selected
+                if(incorrect.children[j].selected) console.log('incorrect:'+incorrect.children[j].value);
+            }
+            console.log('correct:'+selected.value)
+        }
+        function validateSubmission(e) {
+            e.preventDefault()
+            dothething()
+            e.submit()
         }
     </script>
 {% endblock content %}
