@@ -48,13 +48,14 @@
             </div>
         </div>
         
-        <input type='submit' id='charactermaker'>
+        <button type='submit' id='charactermaker'>Save</button>
     </form>
 
     <script defer src="{% static "game/js/character.js" %}"></script>
     <script>
         let bodyType='body1';
-
+        toggleBody()
+        toggleBody()
         function toggleBody(){
             bodyType= ( bodyType == 'body1')? 'body2': 'body1'
              cycleOptions(1,0)
@@ -73,36 +74,33 @@
             }
             n--;
             m=(n+add)%select.children.length;
+            if(m<0){
+                m=m+select.children.length
+            }
             select.children[n].selected = false;
-            console.log(n)
-            console.log(m)
             select.children[m].selected = true;
             let img;
             let inputid;
             switch(side){
                 case 0:
-                    console.log('h')
                     img= document.querySelector(".hair")
                     img.src = select.children[n].value
                     inputid = document.querySelector('input[name="hair_id"]')
                     inputid.value = select.children[n].value.match(/([0-9]+).png$/i)[1]
                     break;
                 case 1:
-                    console.log('e')
                     img= document.querySelector(".eyes")
                     img.src = select.children[n].value
                     inputid = document.querySelector('input[name="eyes_id"]')
                     inputid.value = select.children[n].value.match(/([0-9]+).png$/i)[1]
                     break;
                 case 2:
-                    console.log('s')
                     img= document.querySelector(".skin")
                     img.src = select.children[n].value
                     inputid = document.querySelector('input[name="skin_id"]')
                     inputid.value = select.children[n].value.match(/([0-9]+).png$/i)[1]
                     break;
                 case 3:
-                    console.log('d')
                     img= document.querySelector(".dress")
                     img.src = select.children[n].value
                     inputid = document.querySelector('input[name="dress_id"]')

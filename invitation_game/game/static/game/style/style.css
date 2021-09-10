@@ -2,11 +2,22 @@
 
 * {
     font-family: 'Urbanist', sans-serif; 
+    box-sizing: border-box;
+   
 }
+body{
+    background-image:var(--background-img1);
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    background-position: bottom;
+    margin: 0;
+}
+
 .header {
     display: flex;
     justify-content: flex-start;
-    background-color: #A3B4C8;
+    background-color: var(--primary-color);
 }
 
 .header img{
@@ -25,4 +36,14 @@ main {
     position: absolute;
     top:20px;
     right:20px;
+}
+button, button:focus, button:active {
+    border-color: white;
+    background-color: var(--terciary-color);
+    border-radius: 5px;
+    box-shadow: none;
+    color: white;
+    outline: none;
+    border: 1px solid transparent;
+    padding: 5px;
 }

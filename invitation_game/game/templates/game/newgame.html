@@ -1,20 +1,26 @@
 {% extends "game/base.html"%}
 {% block content %} 
+{% load static %}
+    <link rel="stylesheet" href="{% static 'game/style/profile.css' %}"/>
     <form method='post'>
         {% csrf_token %}
         {% if character %}
-            <a href="{% url 'character-form' gamenumber=gamenumber %}">Change the character</a>
+            <h4>🧍 Characer done ✔ </h4>
+            <a href="{% url 'character-form' gamenumber=gamenumber %}">Update character</a>
             {%if questions%}
-                <a href="{% url 'questions-form' gamenumber=gamenumber name=character_name %}">Change the answers of the questions</a>
+                <h4>❔ Questions answered ✔ </h4>
+                <a href="{% url 'questions-form' gamenumber=gamenumber name=character_name %}">Change the answers</a>
             {%else%}
+                <h4>❔ Answers of the questions missing ❌</h4>
                 <a href="{% url 'questions-form' gamenumber=gamenumber name=character_name %}">Answer the questions for {{character_name}}</a>
             {%endif%}
         {% else %}
+            <h4>🧍 Characer missing ❌</h4>
             <a href="{% url 'character-form' gamenumber=gamenumber %}">Create the character</a>
         {% endif %}
         {{ form }}
         {%if questions and character%}
-            <button type='submit' id='gamemaker'>Submit</button>
+            <button type='submit' id='gamemaker'>Save</button>
         {%endif%}
     </form>
 

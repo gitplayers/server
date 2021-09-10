@@ -1,9 +1,17 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Signup" >
-</form>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'game/style/singup.css' %}"/>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Signup</button>
+    </form>
+    <script>
+       spanes= document.querySelectorAll('span')
+       for(let span of spanes){
+           span.hidden = true
+       }
+    </script>
 {% endblock content %}
