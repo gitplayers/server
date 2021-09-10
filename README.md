@@ -26,7 +26,7 @@ Save and configure your gamevitations games
 
 ### Installation
 
-* Clone or download the repo.
+* Clone or download the repo. `git clone https://github.com/gitplayers/server.git`
 * Open terminal and navigate to the project folder.
 * Run pipenv shell to enter virtual environment (or virtual environment of your choice)
 * Run pipenv install to install dependencies
